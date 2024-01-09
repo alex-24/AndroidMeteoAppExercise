@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="progress_title_big">24sp</dimen>
+    <dimen name="progress_title_normal">16sp</dimen>
+    <dimen name="progress_bar_height">40dp</dimen>
+</resources>

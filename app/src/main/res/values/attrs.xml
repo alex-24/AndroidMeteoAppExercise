@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ProgressBarButtonWithTitleView">
+        <attr name="ProgressBarButtonDisplayMode" format="enum">
+            <enum name="indeterminateLoader" value="0"/>
+            <enum name="button" value="1"/>
+            <enum name="progressbar" value="2"/>
+        </attr>
+        <attr name="InfoTitleDisplayMode" format="enum">
+            <enum name="normal" value="0"/>
+            <enum name="emphasis" value="1"/>
+            <enum name="gone" value="2"/>
+        </attr>
+        <attr name="Title" format="string"/>
+        <attr name="ButtonLabel" format="string"/>
+        <attr name="progressValue" format="integer"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/info_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:textAlignment="center"
+        android:textColor="@color/purple_dark"
+        android:textStyle="bold"
+        android:textSize="@dimen/progress_title_big"
+        tools:text="Welcome" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/main_progressbar_card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/progress_bar_height"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp">
+
+        <RelativeLayout
+            android:id="@+id/layout_for_indeterminate_mode"
+            tools:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/purple_gradient">
+            <ProgressBar
+                android:id="@+id/indeterminate_mode_progress_bar"
+                android:layout_width="@dimen/progress_bar_height"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:gravity="center"
+                android:textStyle="normal"
+                android:indeterminateTint="@color/white"
+                tools:text="Commencer"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_for_button_mode"
+            tools:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/purple_gradient">
+            <TextView
+                android:id="@+id/button_mode_title_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                tools:text="Commencer"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_for_progress_mode"
+            tools:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grey">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/progress_mode_fill_weighted_view"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/purple_gradient"
+                    android:elevation="4dp"
+                    tools:layout_weight="1" />
+
+                <View
+                    android:id="@+id/progress_mode_empty_space_weighted_view"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    tools:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    tools:layout_weight="9" />
+
+                <TextView
+                    android:id="@+id/progress_mode_percentage_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:textColor="@color/purple_dark"
+                    android:textStyle="bold"
+                    tools:text="30 %"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
