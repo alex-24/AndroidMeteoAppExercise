@@ -31,5 +31,10 @@ class MainActivity : FragmentActivity() {
             .replace(bindings.fragmentContainerView.id, WeatherDataFragment())
             .commit()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        this.viewModel.clearData()
+    }
 }
 
