@@ -1,6 +1,8 @@
 package com.example.openweatherapitest.view
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +25,12 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindings.progressbarButton.setButtonMode("Begin") {
-            (requireActivity() as MainActivity).goToMeteoFragment()
+            bindings.progressbarButton.setButtonIndeterminateMode()
+            Handler(Looper.getMainLooper()).postDelayed(
+                { (requireActivity() as MainActivity).goToMeteoFragment() },
+                1000
+            )
+
         }
     }
 }
