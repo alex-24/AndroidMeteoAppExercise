@@ -104,7 +104,7 @@ class WeatherDataFragment : Fragment() {
                         )
                     } ?: this.bindings.progressbarButton.setTitle(
                         "NO MESSAGE !!!",
-                        ProgressBarButtonWithTitleView.TitleDisplayMode.GONE
+                        ProgressBarButtonWithTitleView.TitleDisplayMode.INVISIBLE
                     )
                 }
             },

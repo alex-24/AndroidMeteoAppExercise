@@ -35,6 +35,7 @@ class ProgressBarButtonWithTitleView(
         NORMAL,
         EMPHASIS,
         GONE,
+        INVISIBLE,
     }
 
     enum class ProgressBarButtonDisplayMode { // order must match enum declaration from attrs!!!
@@ -111,6 +112,12 @@ class ProgressBarButtonWithTitleView(
             }
             TitleDisplayMode.GONE -> {
                 this.bindings.infoTitle.visibility = GONE
+                this.bindings.infoTitle.setTypeface(this.bindings.infoTitle.typeface, Typeface.BOLD)
+                this.bindings.infoTitle.setTextColor(ContextCompat.getColor(context, R.color.purple_dark))
+                this.bindings.infoTitle.text = null
+            }
+            TitleDisplayMode.INVISIBLE -> {
+                this.bindings.infoTitle.visibility = INVISIBLE
                 this.bindings.infoTitle.setTypeface(this.bindings.infoTitle.typeface, Typeface.BOLD)
                 this.bindings.infoTitle.setTextColor(ContextCompat.getColor(context, R.color.purple_dark))
                 this.bindings.infoTitle.text = null
