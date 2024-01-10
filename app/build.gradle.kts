@@ -71,6 +71,7 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.1")
     implementation("com.android.volley:volley:1.2.1")
     implementation("com.google.code.gson:gson:2.10.1")
     testImplementation("junit:junit:4.13.2")

@@ -14,6 +14,7 @@ import com.example.openweatherapitest.BuildConfig
 import com.example.openweatherapitest.R
 import com.example.openweatherapitest.data.City
 import com.example.openweatherapitest.databinding.FragmentWeatherDataBinding
+import com.example.openweatherapitest.view.widgets.ProgressBarButtonWithTitleView
 import com.example.openweatherapitest.viewmodel.adapters.WeatherDataAdapter
 import com.example.openweatherapitest.viewmodel.adapters.WeatherDataViewModel
 import kotlin.math.ceil
@@ -74,10 +75,10 @@ class WeatherDataFragment : Fragment() {
 
         Handler(Looper.getMainLooper()).postDelayed(
             {
-                this.viewModel.fetchWeatherData(userCities = cities)
+                refreshData()
 
                 this.viewModel.weatherData.observe(requireActivity()) { data ->
-                    if (BuildConfig.DEBUG) Log.d(TAG, "$data")
+                    if (BuildConfig.DEBUG) Log.d(TAG, "data=$data")
                     val downloadProgress = (ceil(data.keys.size / 5.0 * 100)).toInt()
                     this.dataAdapter.setWeatherData(data)
                     this.bindings.progressbarButton.setProgressMode(downloadProgress)
@@ -93,14 +94,29 @@ class WeatherDataFragment : Fragment() {
                         )
                     }
                 }
+
+                this.viewModel.loadingMessage.observe(requireActivity()) { message ->
+                    if (BuildConfig.DEBUG) Log.d(TAG, "message=$message")
+                    message?.let {
+                        this.bindings.progressbarButton.setTitle(
+                            it,
+                            ProgressBarButtonWithTitleView.TitleDisplayMode.NORMAL
+                        )
+                    } ?: this.bindings.progressbarButton.setTitle(
+                        "NO MESSAGE !!!",
+                        ProgressBarButtonWithTitleView.TitleDisplayMode.GONE
+                    )
+                }
             },
             1000
         )
 
     }
 
-    fun refreshData() {
-        this.viewModel.fetchWeatherData(userCities = cities)
+    private fun refreshData() {
+        if (context != null) {
+            this.viewModel.fetchWeatherData(context = requireContext(), userCities = cities)
+        }
     }
 
     override fun onDestroyView() {
