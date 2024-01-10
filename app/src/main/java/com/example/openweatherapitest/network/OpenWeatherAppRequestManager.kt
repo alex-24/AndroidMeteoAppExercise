@@ -72,8 +72,8 @@ private class VolleyRequest<T : Any>(
     private val TAG = VolleyRequest::class.java.simpleName
 
     override fun parseNetworkResponse(response: NetworkResponse?): Response<T> {
-        if (BuildConfig.DEBUG) Log.d(TAG, "parseNetworkResponse: response => ${response?.data}")
-        val responseString = response?.data.toString()
+        val responseString = response?.let { String(it.data) }
+        if (BuildConfig.DEBUG) Log.d(TAG, "parseNetworkResponse: response => $responseString")
         val parsedObject = Gson().fromJson<T>(responseString, this.responseConcreteType)
         if (BuildConfig.DEBUG) Log.d(TAG, "parseNetworkResponse: parsing SUCCESS")
         return Response.success(parsedObject, null)
