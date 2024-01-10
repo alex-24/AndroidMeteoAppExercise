@@ -24,7 +24,7 @@ class WelcomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindings.progressbarButton.setButtonMode("Begin") {
+        bindings.progressbarButton.setButtonMode("Commencer") {
             bindings.progressbarButton.setButtonIndeterminateMode()
             Handler(Looper.getMainLooper()).postDelayed(
                 { (requireActivity() as MainActivity).goToMeteoFragment() },
