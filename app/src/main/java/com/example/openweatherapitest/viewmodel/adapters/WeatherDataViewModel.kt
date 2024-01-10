@@ -51,7 +51,7 @@ class WeatherDataViewModel: ViewModel() {
                         baseUrl = WeatherAPIConstants.BASE_URL,
                         params = mapOf(
                             "lat" to userCities[i].lat,
-                            "long" to userCities[i].long,
+                            "lon" to userCities[i].long,
                             "appid" to WeatherAPIConstants.key,
                             "exclude" to "minutely,hourly,daily,alerts",
                         ),
@@ -103,6 +103,7 @@ class WeatherDataViewModel: ViewModel() {
     }
 
     fun clearData() {
+        stopRollingLoadingMessages()
         this.weatherData.value = mutableMapOf()
         this.disposables.clear()
     }
