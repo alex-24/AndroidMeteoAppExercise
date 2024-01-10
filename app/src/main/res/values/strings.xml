@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">OpenWeatherAPITest</string>
+    <string name="app_name">Best Weather App</string>
+    <string name="start">Commencer</string>
+    <string name="restart">Remmencer</string>
+    <string name="error">Erreur</string>
+    <string-array name="loading_messages">
+        <item>Nous téléchargeons les données…</item>
+        <item>C’est presque fini…</item>
+        <item>Plus que quelques secondes avant d’avoir le résultat…</item>
+    </string-array>
 </resources>

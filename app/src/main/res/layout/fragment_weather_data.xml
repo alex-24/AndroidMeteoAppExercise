@@ -24,7 +24,6 @@
 
 
     <com.example.openweatherapitest.view.widgets.ProgressBarButtonWithTitleView
-
         android:id="@+id/progressbar_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

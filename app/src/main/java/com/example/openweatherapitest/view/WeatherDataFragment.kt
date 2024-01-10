@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.openweatherapitest.BuildConfig
+import com.example.openweatherapitest.R
 import com.example.openweatherapitest.data.City
 import com.example.openweatherapitest.databinding.FragmentWeatherDataBinding
 import com.example.openweatherapitest.viewmodel.adapters.WeatherDataAdapter
@@ -84,7 +85,7 @@ class WeatherDataFragment : Fragment() {
                     if (downloadProgress == 100) {
                         Handler(Looper.getMainLooper()).postDelayed(
                             {
-                                this.bindings.progressbarButton.setButtonMode("Recommencer") {
+                                this.bindings.progressbarButton.setButtonMode(getString(R.string.restart)) {
                                     refreshData()
                                 }
                             },

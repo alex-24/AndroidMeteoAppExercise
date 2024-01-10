@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.openweatherapitest.MainActivity
+import com.example.openweatherapitest.R
 import com.example.openweatherapitest.databinding.FragmentWelcomeBinding
 
 class WelcomeFragment : Fragment() {
@@ -24,7 +25,7 @@ class WelcomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindings.progressbarButton.setButtonMode("Commencer") {
+        bindings.progressbarButton.setButtonMode(getString(R.string.start)) {
             bindings.progressbarButton.setButtonIndeterminateMode()
             Handler(Looper.getMainLooper()).postDelayed(
                 { (requireActivity() as MainActivity).goToMeteoFragment() },

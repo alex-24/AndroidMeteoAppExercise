@@ -15,8 +15,8 @@
         custom:InfoTitleDisplayMode="emphasis"
         custom:ProgressBarButtonDisplayMode="button"
         tools:progressValue="15"
-        custom:ButtonLabel="Begin"
-        custom:Title="Best Weather App"
+        custom:ButtonLabel="@string/start"
+        custom:Title="@string/app_name"
         />
 
 </LinearLayout>
