@@ -28,7 +28,6 @@ class WeatherDataListRow(context: Context, attrs: AttributeSet? = null, defStyle
 
     @SuppressLint("SetTextI18n")
     fun setData(cityName: String, data: WeatherData?) {
-
         if (BuildConfig.DEBUG) Log.d(TAG, "setData")
         this.bindings.cityNameTextView.text = cityName
         this.bindings.temperatureTextView.text = data?.let { "${data.main.temp}°" } ?: "error"

@@ -104,6 +104,6 @@ class WeatherDataFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        this.viewModel.clearDisposables()
+        this.viewModel.clearData()
     }
 }

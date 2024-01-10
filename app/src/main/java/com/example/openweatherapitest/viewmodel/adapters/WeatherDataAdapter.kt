@@ -1,13 +1,10 @@
 package com.example.openweatherapitest.viewmodel.adapters
 
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.openweatherapitest.BuildConfig
 import com.example.openweatherapitest.data.WeatherData
-import com.example.openweatherapitest.databinding.ViewWeatherDataListRowBinding
 import com.example.openweatherapitest.view.widgets.WeatherDataListRow
 
 class WeatherDataAdapter(private var data: MutableMap<String, WeatherData?>): RecyclerView.Adapter<WeatherDataViewHolder>() {
@@ -23,8 +20,13 @@ class WeatherDataAdapter(private var data: MutableMap<String, WeatherData?>): Re
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherDataViewHolder {
         if (BuildConfig.DEBUG) Log.e(TAG, "onCreateViewHolder")
-        val binding = ViewWeatherDataListRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return WeatherDataViewHolder(binding.root)
+        val itemView = WeatherDataListRow(parent.context).apply {
+            layoutParams = RecyclerView.LayoutParams(
+                RecyclerView.LayoutParams.MATCH_PARENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT
+            )
+        }
+        return WeatherDataViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
@@ -40,10 +42,10 @@ class WeatherDataAdapter(private var data: MutableMap<String, WeatherData?>): Re
     }
 }
 
-class WeatherDataViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class WeatherDataViewHolder(itemView: WeatherDataListRow): RecyclerView.ViewHolder(itemView) {
 
     fun setData(cityName: String, data: WeatherData?) {
-        (this.itemView as? WeatherDataListRow)?.setData(cityName, data)
+        (this.itemView as WeatherDataListRow).setData(cityName, data)
     }
 
 }

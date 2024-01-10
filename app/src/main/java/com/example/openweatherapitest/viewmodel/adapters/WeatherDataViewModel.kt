@@ -21,7 +21,7 @@ class WeatherDataViewModel: ViewModel() {
     val weatherData: MutableLiveData<MutableMap<String, WeatherData?>> = MutableLiveData(mutableMapOf())
     private val disposables: CompositeDisposable = CompositeDisposable()
     fun fetchWeatherData(userCities: List<City>) {
-        clearDisposables()
+        clearData()
         weatherData.value?.clear()
         Observable.intervalRange(
             0L,
@@ -55,7 +55,8 @@ class WeatherDataViewModel: ViewModel() {
         }).addTo(disposables)
     }
 
-    fun clearDisposables() {
+    fun clearData() {
+        this.weatherData.value = mutableMapOf()
         this.disposables.clear()
     }
 }
