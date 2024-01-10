@@ -15,7 +15,7 @@ import com.example.openweatherapitest.data.City
 import com.example.openweatherapitest.databinding.FragmentWeatherDataBinding
 import com.example.openweatherapitest.viewmodel.adapters.WeatherDataAdapter
 import com.example.openweatherapitest.viewmodel.adapters.WeatherDataViewModel
-import kotlin.math.floor
+import kotlin.math.ceil
 
 class WeatherDataFragment : Fragment() {
 
@@ -77,13 +77,29 @@ class WeatherDataFragment : Fragment() {
 
                 this.viewModel.weatherData.observe(requireActivity()) { data ->
                     if (BuildConfig.DEBUG) Log.d(TAG, "$data")
+                    val downloadProgress = (ceil(data.keys.size / 5.0 * 100)).toInt()
                     this.dataAdapter.setWeatherData(data)
-                    this.bindings.progressbarButton.setProgressMode((floor(data.keys.size / 5.0 * 100)).toInt())
+                    this.bindings.progressbarButton.setProgressMode(downloadProgress)
+
+                    if (downloadProgress == 100) {
+                        Handler(Looper.getMainLooper()).postDelayed(
+                            {
+                                this.bindings.progressbarButton.setButtonMode("Recommencer") {
+                                    refreshData()
+                                }
+                            },
+                            1000
+                        )
+                    }
                 }
             },
             1000
         )
 
+    }
+
+    fun refreshData() {
+        this.viewModel.fetchWeatherData(userCities = cities)
     }
 
     override fun onDestroyView() {
