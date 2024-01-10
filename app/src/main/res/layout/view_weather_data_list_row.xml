@@ -7,25 +7,28 @@
 
     <TextView
         android:id="@+id/city_name_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="@color/purple_dark"
         android:textStyle="bold"
+        android:textAlignment="textEnd"
         android:text="title"/>
 
     <TextView
         android:id="@+id/temperature_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textAlignment="center"
         android:text="temp"/>
 
     <TextView
         android:id="@+id/cloudiness_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textAlignment="textStart"
         android:text="clouds"/>
 
 </LinearLayout>
