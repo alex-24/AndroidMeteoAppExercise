@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.openweatherapitest.BuildConfig
 import com.example.openweatherapitest.R
-import com.example.openweatherapitest.data.City
+import com.example.openweatherapitest.data.model.City
 import com.example.openweatherapitest.databinding.FragmentWeatherDataBinding
 import com.example.openweatherapitest.view.widgets.ProgressBarButtonWithTitleView
 import com.example.openweatherapitest.viewmodel.adapters.WeatherDataAdapter

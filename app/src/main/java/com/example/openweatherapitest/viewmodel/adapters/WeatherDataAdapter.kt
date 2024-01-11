@@ -4,7 +4,7 @@ import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.openweatherapitest.BuildConfig
-import com.example.openweatherapitest.data.WeatherData
+import com.example.openweatherapitest.data.model.WeatherData
 import com.example.openweatherapitest.view.widgets.WeatherDataListRow
 
 class WeatherDataAdapter(private var data: MutableMap<String, WeatherData?>): RecyclerView.Adapter<WeatherDataViewHolder>() {

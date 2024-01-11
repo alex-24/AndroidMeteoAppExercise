@@ -1,4 +1,4 @@
-package com.example.openweatherapitest.data
+package com.example.openweatherapitest.data.model
 
 data class City (
     val name: String,

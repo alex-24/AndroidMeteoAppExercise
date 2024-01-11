@@ -6,10 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.openweatherapitest.BuildConfig
 import com.example.openweatherapitest.R
-import com.example.openweatherapitest.data.City
-import com.example.openweatherapitest.data.WeatherData
-import com.example.openweatherapitest.data.constants.WeatherAPIConstants
-import com.example.openweatherapitest.network.OpenWeatherAppRequestManager
+import com.example.openweatherapitest.data.model.City
+import com.example.openweatherapitest.data.model.WeatherData
+import com.example.openweatherapitest.service.WeatherDataService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -24,7 +23,7 @@ class WeatherDataViewModel: ViewModel() {
 
     val weatherData: MutableLiveData<MutableMap<String, WeatherData?>> = MutableLiveData(mutableMapOf())
     val loadingMessage: MutableLiveData<String?> = MutableLiveData(null)
-    var loadingMessageDisposable: Disposable? = null
+    private var loadingMessageDisposable: Disposable? = null
 
 
     private val disposables: CompositeDisposable = CompositeDisposable()
@@ -47,24 +46,19 @@ class WeatherDataViewModel: ViewModel() {
             .subscribe (
                 { n ->
                     val i : Int = n.toInt()
-                    OpenWeatherAppRequestManager.fetchObject(
-                        baseUrl = WeatherAPIConstants.BASE_URL,
-                        params = mapOf(
-                            "lat" to userCities[i].lat,
-                            "lon" to userCities[i].long,
-                            "appid" to WeatherAPIConstants.key,
-                            "exclude" to "minutely,hourly,daily,alerts",
-                        ),
-                        responseReturnType = WeatherData::class.java
-                    ).subscribe ({ weatherData ->
-                        if (BuildConfig.DEBUG) Log.d(TAG, "received data for ${this.weatherData.value!![userCities[i].name]}")
-                        this.weatherData.value!![userCities[i].name] = weatherData
-                        this.weatherData.postValue(this.weatherData.value)
-                    }, {
-                        if (BuildConfig.DEBUG) Log.e(TAG, "failed to retrieve data for ${this.weatherData.value!![userCities[i].name]}")
-                        this.weatherData.value!![userCities[i].name] = null
-                        this.weatherData.value = this.weatherData.value
-                    }).addTo(disposables)
+                    WeatherDataService
+                        .fetchWeather(city = userCities[i])
+                        .subscribe (
+                            { weatherData ->
+                                if (BuildConfig.DEBUG) Log.d(TAG, "received data for ${this.weatherData.value!![userCities[i].name]}")
+                                this.weatherData.value!![userCities[i].name] = weatherData
+                                this.weatherData.postValue(this.weatherData.value)
+                            }, {
+                                if (BuildConfig.DEBUG) Log.e(TAG, "failed to retrieve data for ${this.weatherData.value!![userCities[i].name]}")
+                                this.weatherData.value!![userCities[i].name] = null
+                                this.weatherData.value = this.weatherData.value
+                            }
+                        ).addTo(disposables)
                 },
                 { error ->
                     Log.e(TAG, "Error in Rx Observable.interval flow...", error)
@@ -103,6 +97,7 @@ class WeatherDataViewModel: ViewModel() {
     }
 
     fun clearData() {
+        WeatherDataService.clearRequestQueue()
         stopRollingLoadingMessages()
         this.weatherData.value = mutableMapOf()
         this.disposables.clear()

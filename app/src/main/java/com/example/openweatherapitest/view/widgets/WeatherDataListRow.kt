@@ -11,9 +11,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.openweatherapitest.BuildConfig
 import com.example.openweatherapitest.R
-import com.example.openweatherapitest.data.WeatherData
-import com.example.openweatherapitest.data.constants.WeatherAPIConstants
+import com.example.openweatherapitest.data.model.WeatherData
 import com.example.openweatherapitest.databinding.ViewWeatherDataListRowBinding
+import com.example.openweatherapitest.service.WeatherDataService
 
 class WeatherDataListRow(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0): LinearLayout(context, attrs, defStyleAttr, defStyleRes) {
 
@@ -43,7 +43,7 @@ class WeatherDataListRow(context: Context, attrs: AttributeSet? = null, defStyle
             this.bindings.cloudinessImageView.visibility = VISIBLE
             Glide
                 .with(context)
-                .load("${WeatherAPIConstants.PICTOGRAM_BASE_URL}/${data.weather.firstOrNull()?.icon}.png")
+                .load("${WeatherDataService.PICTOGRAM_BASE_URL}/${data.weather.firstOrNull()?.icon}.png")
                 .fallback(R.drawable.ic_weather_placeholder)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)

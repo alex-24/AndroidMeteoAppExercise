@@ -1,4 +1,4 @@
-package com.example.openweatherapitest.data
+package com.example.openweatherapitest.data.model
 
 data class WeatherData(
     val coord: Coord,

@@ -1,6 +1,6 @@
 package com.example.openweatherapitest.data.constants
 
-import com.example.openweatherapitest.data.City
+import com.example.openweatherapitest.data.model.City
 
 class CityList {
     companion object {

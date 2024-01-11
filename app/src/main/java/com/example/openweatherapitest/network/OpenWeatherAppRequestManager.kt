@@ -25,7 +25,7 @@ class OpenWeatherAppRequestManager {
             BasicNetwork(HurlStack())
         ).apply { start() }
 
-        fun <T: Any> fetchObject(baseUrl: String, params: Map<String, String>?, responseReturnType: Class<T>): Single<T> {
+        fun <T: Any> fetchObject(baseUrl: String, params: Map<String, String>?, responseReturnType: Class<T>, requestTag: String): Single<T> {
             return Single.create { emitter ->
                 val listener = VolleyResultListener(emitter)
                 val request = VolleyRequest(
@@ -33,8 +33,10 @@ class OpenWeatherAppRequestManager {
                     method = Request.Method.POST,
                     url = parseUrl(baseUrl, params),
                     listener = listener,
-                )
-                request.setRetryPolicy(DefaultRetryPolicy(0, 0, 0f))
+                ).apply {
+                    retryPolicy = DefaultRetryPolicy(0, 0, 0f)
+                    this.tag = requestTag
+                }
 
                 requestQueue.add(request)
             }
@@ -52,6 +54,14 @@ class OpenWeatherAppRequestManager {
                     }
                     .orEmpty()
             )
+        }
+
+        fun clearRequestQueue(){
+            this.requestQueue.cancelAll{ true }
+        }
+
+        fun clearRequestQueue(requestTag: String){
+            this.requestQueue.cancelAll{ it.tag == requestTag }
         }
     }
 
