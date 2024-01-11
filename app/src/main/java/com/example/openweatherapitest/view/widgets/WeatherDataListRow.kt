@@ -33,29 +33,33 @@ class WeatherDataListRow(context: Context, attrs: AttributeSet? = null, defStyle
 
     @SuppressLint("SetTextI18n")
     fun setData(cityName: String, data: WeatherData?) {
-        if (BuildConfig.DEBUG) Log.d(TAG, "setData")
         this.bindings.cityNameTextView.text = cityName
-        data?.let {
-            this.bindings.temperatureTextView.setTextColor(ContextCompat.getColor(context, R.color.black))
-            this.bindings.cloudinessTextView.setTextColor(ContextCompat.getColor(context, R.color.black))
-            this.bindings.temperatureTextView.text = "${data.main.temp}°K" // default kelvin unit
-            this.bindings.cloudinessTextView.visibility = GONE
-            this.bindings.cloudinessImageView.visibility = VISIBLE
-            Glide
-                .with(context)
-                .load("${WeatherDataService.PICTOGRAM_BASE_URL}/${data.weather.firstOrNull()?.icon}.png")
-                .fallback(R.drawable.ic_weather_placeholder)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
-                .into(this.bindings.cloudinessImageView)
-            //this.bindings.cloudinessTextView.text = "${data.weather.firstOrNull()?.description}°"
-        } ?: {
-            this.bindings.cloudinessTextView.visibility = VISIBLE
-            this.bindings.cloudinessImageView.visibility = GONE
-            this.bindings.temperatureTextView.setTextColor(ContextCompat.getColor(context, R.color.red))
-            this.bindings.cloudinessTextView.setTextColor(ContextCompat.getColor(context, R.color.red))
-            this.bindings.temperatureTextView.text = resources.getString(R.string.error)
-            this.bindings.cloudinessTextView.text = resources.getString(R.string.error)
+        when(data) {
+            null -> {
+                if (BuildConfig.DEBUG) Log.e(TAG, "setData - error case")
+                this.bindings.cloudinessTextView.visibility = VISIBLE
+                this.bindings.cloudinessImageView.visibility = GONE
+                this.bindings.temperatureTextView.setTextColor(ContextCompat.getColor(context, R.color.red))
+                this.bindings.cloudinessTextView.setTextColor(ContextCompat.getColor(context, R.color.red))
+                this.bindings.temperatureTextView.text = resources.getString(R.string.error)
+                this.bindings.cloudinessTextView.text = resources.getString(R.string.error)
+            }
+            else -> {
+                if (BuildConfig.DEBUG) Log.d(TAG, "setData - success case")
+                this.bindings.temperatureTextView.setTextColor(ContextCompat.getColor(context, R.color.black))
+                this.bindings.cloudinessTextView.setTextColor(ContextCompat.getColor(context, R.color.black))
+                this.bindings.temperatureTextView.text = "${data.main.temp}°K" // default kelvin unit
+                this.bindings.cloudinessTextView.visibility = GONE
+                this.bindings.cloudinessImageView.visibility = VISIBLE
+                Glide
+                    .with(context)
+                    .load("${WeatherDataService.PICTOGRAM_BASE_URL}/${data.weather.firstOrNull()?.icon}.png")
+                    .fallback(R.drawable.ic_weather_placeholder)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(this.bindings.cloudinessImageView)
+                //this.bindings.cloudinessTextView.text = "${data.weather.firstOrNull()?.description}°"
+            }
         }
     }
 }
