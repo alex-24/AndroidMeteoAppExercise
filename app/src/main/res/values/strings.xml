@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Best Weather App</string>
     <string name="start">Commencer</string>
-    <string name="restart">Remmencer</string>
+    <string name="restart">Recommencer</string>
     <string name="error">Erreur</string>
     <string-array name="loading_messages">
         <item>Nous téléchargeons les données…</item>
