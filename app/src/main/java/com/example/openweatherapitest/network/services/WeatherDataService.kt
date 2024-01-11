@@ -1,8 +1,8 @@
-package com.example.openweatherapitest.service
+package com.example.openweatherapitest.network.services
 
 import com.example.openweatherapitest.data.model.City
 import com.example.openweatherapitest.data.model.WeatherData
-import com.example.openweatherapitest.network.OpenWeatherAppRequestManager
+import com.example.openweatherapitest.network.CentralRequestManager
 import io.reactivex.rxjava3.core.Single
 
 class WeatherDataService {
@@ -12,10 +12,10 @@ class WeatherDataService {
 
         const val BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
         const val PICTOGRAM_BASE_URL = "https://openweathermap.org/img/wn"
-        const val API_KEY = "<insert key here>"
+        const val API_KEY = "<insert key here>" //TODO: provide api key
 
         fun fetchWeather(city: City): Single<WeatherData> {
-            return OpenWeatherAppRequestManager.fetchObject(
+            return CentralRequestManager.fetchObject(
                 baseUrl = BASE_URL,
                 params = mapOf(
                     "lat" to city.lat,
@@ -29,7 +29,7 @@ class WeatherDataService {
         }
 
         fun clearRequestQueue() {
-            OpenWeatherAppRequestManager.clearRequestQueue(TAG)
+            CentralRequestManager.clearRequestQueue(TAG)
         }
     }
 }

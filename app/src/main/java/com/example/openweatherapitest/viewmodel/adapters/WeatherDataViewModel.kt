@@ -8,7 +8,7 @@ import com.example.openweatherapitest.BuildConfig
 import com.example.openweatherapitest.R
 import com.example.openweatherapitest.data.model.City
 import com.example.openweatherapitest.data.model.WeatherData
-import com.example.openweatherapitest.service.WeatherDataService
+import com.example.openweatherapitest.network.services.WeatherDataService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable

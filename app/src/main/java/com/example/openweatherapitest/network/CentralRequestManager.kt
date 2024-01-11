@@ -17,7 +17,7 @@ import io.reactivex.rxjava3.core.SingleEmitter
 import java.lang.IllegalStateException
 import java.lang.reflect.Type
 
-class OpenWeatherAppRequestManager {
+class CentralRequestManager {
     companion object {
 
         private var requestQueue: RequestQueue = RequestQueue(

@@ -13,7 +13,7 @@ import com.example.openweatherapitest.BuildConfig
 import com.example.openweatherapitest.R
 import com.example.openweatherapitest.data.model.WeatherData
 import com.example.openweatherapitest.databinding.ViewWeatherDataListRowBinding
-import com.example.openweatherapitest.service.WeatherDataService
+import com.example.openweatherapitest.network.services.WeatherDataService
 
 class WeatherDataListRow(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0): LinearLayout(context, attrs, defStyleAttr, defStyleRes) {
 
