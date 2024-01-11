@@ -17,4 +17,5 @@ This is a small Android app made in a MVVM pattern and that uses data from `http
 - Glide for image loading
 
 # Demo 
-https://github.com/alex-24/MeteoApp/blob/master/resources/demo.mp4
+https://github.com/alex-24/MeteoApp/assets/12444664/1aee3694-02bb-4fbc-bb2e-46068bc98c05
+
